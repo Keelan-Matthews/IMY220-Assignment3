@@ -15,6 +15,23 @@ class EventHandler {
             .sort((a, b) => new Date(a.dateStart).getMonth() - new Date(b.dateStart).getMonth());
     }
     getSummary() {
+        if (arguments.length === 0) {
+            return events.map(e => {
+                if (e.dateStart === e.dateEnd) 
+                    return `On ${e.dateStart}: ${e.name} (${e.description})`;
+                else
+                    return `From ${e.dateStart} to ${e.dateEnd}: ${e.name} (${e.description})`;
+            })
+        }
+        else {
+            let args = Array.prototype.slice.apply(arguments);
+            return args.map(e => {
+                if (e.dateStart === e.dateEnd) 
+                    return `On ${e.dateStart}: ${e.name} (${e.description})`;
+                else
+                    return `From ${e.dateStart} to ${e.dateEnd}: ${e.name} (${e.description})`;
+            })
+        }
     }
 }
 
@@ -38,4 +55,5 @@ Array.prototype.getSummary = eventHandler.getSummary;
 console.log(eventHandler.getEventsBetweenDates("2022/02/01", "2022/02/14"));
 console.log(eventHandler.getByMonth(05));
 console.log(eventHandler.getUniqueDateAndSort());
-console.log(eventHandler.getSummary());
+console.log(eventHandler.getSummary({name: 'Pizza party', description: "Pizza party at work",
+dateStart: '2022/07/10', dateEnd: '2022/07/10'}));
