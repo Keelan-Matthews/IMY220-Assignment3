@@ -4,23 +4,17 @@ class EventHandler {
     }
 
     getEventsBetweenDates(start, end) {
-        return this.events.filter(event => {
-            return event.dateStart >= start && event.dateEnd <= end;
-        }).sort((a, b) => {
-            return a.dateStart - b.dateStart;
-        });
+        return this.events.filter(e => e.dateStart >= start && e.dateEnd <= end);
     }
 
     getByMonth(month) {
-        return this.events.filter(event => {
-            return event.dateStart.getMonth() === month;
-        }).sort((a, b) => {
-            return a.dateStart - b.dateStart;
-        });
+        return this.events.filter(e => new Date(e.dateStart).getMonth() === month);
     }
 
     getUniqueDateAndSort() {
-
+        return this.events
+                    .filter((e, i, self) => self.indexOf(e) === i)
+                    .sort((a, b) => new Date(a).getMonth() - new Date(b).getMonth());
     }
 
     getSummary() {
