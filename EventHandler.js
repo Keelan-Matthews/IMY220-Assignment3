@@ -2,27 +2,22 @@ class EventHandler {
     constructor(events) {
         this.events = events;
     }
-
     getEventsBetweenDates(start, end) {
         return events.filter(e => e.dateStart >= start && e.dateEnd <= end);
     }
-
     getByMonth(month) {
         return events.filter(e => new Date(e.dateStart).getMonth() === month);
     }
-
     getUniqueDateAndSort() {
         return events
-                .filter((e, i, self) => 
-                    self.findIndex(t => t.dateStart === e.dateStart && t.dateEnd === e.dateEnd) === i
-                )
-                .sort((a, b) => new Date(a.dateStart).getMonth() - new Date(b.dateStart).getMonth());
+            .filter((e, i, self) => self.findIndex(t => t.dateStart === e.dateStart && t.dateEnd === e.dateEnd) === i
+            )
+            .sort((a, b) => new Date(a.dateStart).getMonth() - new Date(b.dateStart).getMonth());
     }
-
     getSummary() {
-        
     }
 }
+
 
 var events = [
 	{name: "University expo", description: "Expo to showcase University degrees", dateStart: "2022/02/01", dateEnd: "2022/02/14"},
@@ -34,6 +29,12 @@ var events = [
 ];
 
 const eventHandler = new EventHandler(events);
+
+Array.prototype.getEventsBetweenDates = eventHandler.getEventsBetweenDates;
+Array.prototype.getByMonth = eventHandler.getByMonth;
+Array.prototype.getUniqueDateAndSort = eventHandler.getUniqueDateAndSort;
+Array.prototype.getSummary = eventHandler.getSummary;
+
 console.log(eventHandler.getEventsBetweenDates("2022/02/01", "2022/02/14"));
 console.log(eventHandler.getByMonth(05));
 console.log(eventHandler.getUniqueDateAndSort());
