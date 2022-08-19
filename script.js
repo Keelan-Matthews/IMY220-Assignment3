@@ -9,7 +9,3 @@ var events = [
 ];
 
 const eventHandler = new EventHandler(events);
-console.log(eventHandler.getEventsBetweenDates("2022/02/01", "2022/02/14"));
-console.log(eventHandler.getByMonth(05));
-console.log(eventHandler.getUniqueDateAndSort());
-console.log(eventHandler.getSummary());
